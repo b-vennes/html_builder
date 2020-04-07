@@ -2,11 +2,11 @@ class Html:
     def __init__(self, tag_name, *class_names, **attributes):
         """Initializes a new html tag."""
         self.name = tag_name
-        self.class_names = class_names
+        self.class_names = list(class_names)
         self.attributes = attributes
         self.children = []
 
-    def render(self):
+    def render(self, output_file_path=None):
         """Renders the html tag as a string."""
         html = f'<{self.name}'
 
@@ -20,6 +20,11 @@ class Html:
         rendered_children = self.__render_children()
 
         html += f'>{rendered_children}</{self.name}>'
+
+        if output_file_path != None:
+            output_file = open(output_file_path, 'w')
+            output_file.write(html)
+            output_file.close()
 
         return html
 
