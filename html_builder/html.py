@@ -34,10 +34,10 @@ class Html:
 
         for child in self.children:
             rendered_children += '\n    '
-            if type(child) is str:
-                rendered_children += child
-            else:
+            if type(child) is Html:
                 rendered_children += child.render().replace('\n','\n    ')
+            else:
+                rendered_children += child
         
         rendered_children += '\n'
         
